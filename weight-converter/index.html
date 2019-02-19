@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Weight Converter</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="display-4 text-center mt-5">Weight Conversion Tool</h1>
+            <form>
+                <div class="form-group">
+                    <label for="inputWeight"></label>
+                    <input id="inputWeight" oninput="calcWeight()" class="form-control form-control-lg" type="number"
+                           placeholder="Enter weight value in kilograms..">
+                </div>
+            </form>
+            <div id="output">
+                <div class="p-3 mb-2 mt-5 bg-primary text-white">Stone:
+                    <div id="outputStone">0.00
+                    </div>
+                </div>
+                <div class="p-3 mb-2 bg-success text-white">Pounds:
+                    <div id="outputPounds">0.00
+                    </div>
+                </div>
+                <div class="p-3 mb-2 bg-danger text-white">Ounces:
+                    <div id="outputOunces">0.00
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-auto py-3">
+        <span class="text-muted">Created by Adam Clydesdale | <a target="_blank" rel="noopener noreferrer"
+                                                                 href="http://github.com/aclydesdale"
+                                                                 class="badge badge-info">Github</a></a></span>
+    </footer>
+</div>
+<script>
+    function calcWeight() {
+        let kg = document.getElementById("inputWeight").value;
+        document.getElementById("outputStone").innerHTML = (kg / 6.35).toFixed(2);
+        document.getElementById("outputPounds").innerHTML = (kg * 2.205).toFixed(2);
+        document.getElementById("outputOunces").innerHTML = (kg * 35.274).toFixed(2);
+    }
+</script>
+</body>
+</html>
