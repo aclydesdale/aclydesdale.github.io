@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html class="dark">
+<head>
+    <title>{{ page.title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8A2BE2',
+                        'primary-hover': '#9B4DFF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Initial state - hidden */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        /* Animation class */
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        /* Ensure theme toggle is always visible */
+        .theme-toggle {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
+    <script>
+        // Set dark mode as default if no preference is stored
+        if (!('theme' in localStorage)) {
+            localStorage.theme = 'dark';
+        }
+        
+        // Only switch to light if explicitly set
+        if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark');
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        // Fade in content after page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.content-wrapper');
+            // Small delay to ensure smooth animation
+            setTimeout(() => {
+                content.classList.add('show');
+            }, 150);
+        });
+    </script>
+    {% seo %}
+</head>
+
+<body class="bg-white dark:bg-[#121212] text-gray-900 dark:text-white font-sans transition-colors duration-200">
+    <div class="content-wrapper fade-in">
+        <div class="max-w-2xl mx-auto relative">
+            <button onclick="toggleTheme()" 
+                    class="theme-toggle absolute right-4 top-8 w-10 h-10 flex items-center justify-center rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200">
+                <i class="fas fa-sun text-lg dark:hidden text-gray-800"></i>
+                <i class="fas fa-moon text-lg hidden dark:block text-gray-200"></i>
+            </button>
+            {{ content }}
+        </div>
+    </div>
+</body>
+</html> 
