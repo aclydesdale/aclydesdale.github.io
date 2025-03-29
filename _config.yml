@@ -1,0 +1,20 @@
+title: Adam Clydesdale
+description: Personal website of Adam Clydesdale
+baseurl: ""
+url: "https://aclydesdale.github.io"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git/ 
+  - run-local.sh
+  - Dockerfile
